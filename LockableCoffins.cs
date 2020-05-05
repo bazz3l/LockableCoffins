@@ -31,8 +31,8 @@ namespace Oxide.Plugins
         {
             if (parentEntity != null && parentEntity.PrefabName.Contains("coffin"))
             {
-                Vector3 currentPos = entity.transform.localPosition;
-                entity.transform.localPosition = currentPos += new Vector3(0.1f, -0.2f, 0f);
+                Vector3 currentLocalPosition   = entity.transform.localPosition;
+                entity.transform.localPosition = currentLocalPosition += new Vector3(0.1f, -0.2f, 0f);
                 parentEntity.SendNetworkUpdateImmediate();
             }
         }
