@@ -29,12 +29,14 @@ namespace Oxide.Plugins
 
         void MoveLock(BaseEntity entity, BaseEntity parentEntity)
         {
-            if (parentEntity != null && parentEntity.PrefabName.Contains("coffin"))
+            if (parentEntity == null || !parentEntity.PrefabName.Contains("coffin"))
             {
-                Vector3 currentLocalPosition   = entity.transform.localPosition;
-                entity.transform.localPosition = currentLocalPosition += new Vector3(0.1f, -0.2f, 0f);
-                parentEntity.SendNetworkUpdateImmediate();
+                return;
             }
+
+            Vector3 currentLocalPosition   = entity.transform.localPosition;
+            entity.transform.localPosition = currentLocalPosition += new Vector3(0.1f, -0.2f, 0f);
+            parentEntity.SendNetworkUpdateImmediate();
         }
         #endregion
     }
