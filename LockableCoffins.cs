@@ -16,20 +16,25 @@ namespace Oxide.Plugins
 
             if (entity is BaseLock)
             {
-                BaseEntity parentEntity = entity.GetParentEntity();
-
-                if (parentEntity != null && parentEntity.PrefabName.Contains("coffin"))
-                {
-                    entity.transform.localPosition += new Vector3(0.1f, -0.2f, 0f);
-
-                    parentEntity.SendNetworkUpdateImmediate();
-                }
+                MoveLock(entity as BaseEntity);
             }
         }
         #endregion
 
         #region Core
         void MakeLockable(StorageContainer container) => container.isLockable = true;
+
+        void MoveLock(BaseEntity entity)
+        {
+            BaseEntity parentEntity = entity.GetParentEntity();
+
+            if (parentEntity != null && parentEntity.PrefabName.Contains("coffin"))
+            {
+                entity.transform.localPosition += new Vector3(0.1f, -0.2f, 0f);
+
+                parentEntity.SendNetworkUpdateImmediate();
+            }
+        }
         #endregion
     }
 }
